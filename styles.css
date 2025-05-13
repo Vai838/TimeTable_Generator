@@ -1,0 +1,608 @@
+/* General Styles */
+:root {
+    --primary-color: #4CAF50;
+    --primary-hover-color: #388e3c;
+    --secondary-color: #2F65FE;
+    --text-color-light: #333;
+    --text-color-dark: #e0e0e0;
+    --bg-color-light: #ffffff;
+    --bg-color-dark: #121212;
+    --container-bg-light: #f9f9f9;
+    --container-bg-dark: #1e1e1e;
+    --border-color-light: #ddd;
+    --border-color-dark: #444;
+    --input-bg-light: #fff;
+    --input-bg-dark: #2a2a2a;
+    --input-border-light: #ccc;
+    --input-border-dark: #555;
+    --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font stack */
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-family);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light Theme (Default) */
+body.light-theme {
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
+}
+
+/* Dark Theme */
+body.dark-theme {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+}
+
+body.dark-theme .container {
+    background-color: var(--container-bg-dark);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme header h1 {
+    color: var(--primary-color);
+}
+
+body.dark-theme .input-section input[type="text"],
+body.dark-theme .input-section input[type="color"],
+body.dark-theme select { /* If you add select elements */
+    background-color: var(--input-bg-dark);
+    border-color: var(--input-border-dark);
+    color: var(--text-color-dark);
+}
+body.dark-theme ::placeholder {
+    color: #888;
+}
+
+body.dark-theme #timetable-grid div {
+    border-color: var(--border-color-dark);
+}
+body.dark-theme #timetable-grid .time-slot,
+body.dark-theme #timetable-grid .day {
+    background-color: #2c2c2c; /* Darker background for headers in dark mode */
+    color: var(--text-color-dark);
+}
+body.dark-theme #timetable-grid .editable {
+    background-color: #333; /* Darker editable cells */
+}
+body.dark-theme #timetable-grid .editable:hover {
+    background-color: #454545;
+}
+body.dark-theme .lunch {
+    background-color: #c0392b; /* Slightly adjusted lunch color for dark theme if needed */
+    color: #fff;
+}
+body.dark-theme footer {
+    background-color: #1e1e1e; /* Darker footer for dark theme */
+    color: var(--text-color-dark);
+}
+body.dark-theme footer a {
+    color: var(--primary-color);
+}
+
+body.dark-theme .legend-section {
+    background-color: var(--container-bg-dark);
+    border-top: 1px solid var(--border-color-dark);
+    border-bottom: 1px solid var(--border-color-dark);
+}
+
+.theme-toggler {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.theme-toggler button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 12px;
+    font-size: 1.2rem;
+    border-radius: 50%; /* Circular button */
+    cursor: pointer;
+    box-shadow: var(--card-shadow);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.theme-toggler button:hover {
+    background-color: var(--primary-hover-color);
+    transform: scale(1.1);
+}
+
+
+.container {
+    max-width: 900px; /* Slightly wider for better desktop view */
+    margin: 70px auto 20px auto; /* Added top margin for theme toggler */
+    padding: 25px;
+    background-color: var(--container-bg-light);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 2.5rem;
+}
+
+header p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+}
+body.dark-theme header p {
+    color: #bbb;
+}
+
+header .instructions {
+    font-size: 0.95rem;
+    color: var(--secondary-color);
+    background-color: rgba(47, 101, 254, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+    text-align: left;
+    display: inline-block;
+}
+
+/* Input Sections (Course/Semester and Subject Form) */
+.input-section {
+    margin-bottom: 25px;
+    padding: 20px;
+    background-color: rgba(0,0,0,0.02); /* Subtle background */
+    border-radius: 8px;
+    border: 1px solid var(--border-color-light);
+}
+body.dark-theme .input-section {
+    background-color: rgba(255,255,255,0.05);
+    border-color: var(--border-color-dark);
+}
+
+.course-semester-section {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    justify-content: center; /* Center items */
+    gap: 15px; /* Space between items */
+}
+
+.course-semester-section input[type="text"] {
+    flex-grow: 1; /* Allow inputs to grow */
+    min-width: 250px; /* Minimum width before wrapping */
+    padding: 12px;
+    border: 1px solid var(--input-border-light);
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.subject-input-section #subject-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end; /* Align items to the bottom for better look */
+    gap: 15px; /* Space between form elements */
+    justify-content: center;
+}
+
+.subject-input-section #subject-form div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Space between label and input */
+}
+
+.subject-input-section label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 3px;
+    color: #555;
+}
+body.dark-theme .subject-input-section label {
+    color: #ccc;
+}
+
+
+.subject-input-section input[type="text"],
+.subject-input-section input[type="color"] {
+    padding: 10px;
+    border: 1px solid var(--input-border-light);
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.subject-input-section input[type="color"] {
+    height: 45px; /* Match text input height */
+    padding: 5px; /* Adjust padding for color input */
+}
+
+.subject-input-section button {
+    align-self: flex-end; /* Align button with the bottom of inputs */
+}
+
+
+/* Timetable Section */
+.timetable-section {
+    margin-top: 30px;
+    text-align: center; /* Center the "Your Timetable" heading */
+}
+.timetable-section h2 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+#timetable-export-wrapper {
+    padding: 1cm; /* This padding will act as the margin for PNG */
+    background-color: var(--bg-color-light); /* Ensure this matches the desired PNG background */
+    /* For dark theme PNGs, you might need JS to toggle this background before capture */
+}
+body.dark-theme #timetable-export-wrapper {
+     background-color: var(--bg-color-dark);
+}
+
+
+#timetable-grid-container {
+    overflow-x: auto; /* Allow horizontal scrolling for the grid on small screens */
+    padding-bottom: 10px; /* Space for scrollbar without overlap */
+}
+
+#timetable-grid {
+    display: grid;
+    /* grid-template-columns will be set by JS */
+    gap: 1px; /* Reduced gap for a tighter look */
+    border: 1px solid var(--border-color-light);
+    background-color: var(--bg-color-light); /* Grid background */
+    position: relative;
+    z-index: 1;
+    min-width: 700px; /* Minimum width before scrollbar appears */
+}
+body.dark-theme #timetable-grid {
+    border-color: var(--border-color-dark);
+    background-color: var(--bg-color-dark);
+}
+
+
+#timetable-grid::before { /* Watermark */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://raw.githubusercontent.com/Vai838/Timetablegenerator/refs/heads/main/elfenix.png'); /*IMAGE PATH(NOT LOCAL)*/
+    background-size: contain;
+    background-position: 20% center; /* Center watermark */
+    background-repeat: no-repeat;
+    opacity: 0.05; /* More subtle watermark */
+    pointer-events: none;
+    z-index: 0;
+}
+body.dark-theme #timetable-grid::before {
+    opacity: 0.08; /* Slightly more visible on dark background if needed */
+}
+
+
+#timetable-grid div {
+    border: 1px solid var(--border-color-light);
+    padding: 12px 8px; /* More padding vertically */
+    text-align: center;
+    font-size: 0.9rem;
+    min-height: 50px; /* Ensure cells have a minimum height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Prevent text overflow */
+    text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+    white-space: normal; /* Allow text to wrap if needed, but might make cells taller */
+}
+
+#timetable-grid .time-slot,
+#timetable-grid .day {
+    background-color: #e9e9e9;
+    font-weight: bold;
+    position: sticky; /* Sticky headers */
+    z-index: 2;
+}
+#timetable-grid .day {
+    left: 0; /* Stick day column to the left */
+}
+#timetable-grid div:first-child { /* Top-left empty cell */
+    background-color: #e0e0e0;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 3; /* Above other sticky elements */
+}
+#timetable-grid .time-slot {
+    top: 0; /* Stick time slots to the top */
+}
+
+
+#timetable-grid .editable {
+    cursor: pointer;
+    background-color: #fdfdfd;
+    transition: background-color 0.2s ease;
+}
+
+#timetable-grid .editable:hover {
+    background-color: #e0f7fa; /* Light blue hover */
+}
+body.dark-theme #timetable-grid .editable:hover {
+    background-color: #3a4a4d;
+}
+
+.lunch {
+    background-color: #ff6b6b; /* Softer red for lunch */
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Legend Section */
+.legend-section {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border-top: 1px solid var(--border-color-light);
+    border-bottom: 1px solid var(--border-color-light);
+}
+.legend-section h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+#legend-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+#legend-container div { /* Legend item */
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: var(--bg-color-light);
+    border: 1px solid var(--border-color-light);
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+body.dark-theme #legend-container div {
+    background-color: var(--input-bg-dark);
+    border-color: var(--border-color-dark);
+}
+#legend-container .legend-color-box {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border-radius: 3px;
+    border: 1px solid rgba(0,0,0,0.2); /* Subtle border for light color boxes */
+}
+#legend-container p { /* "No subjects" message */
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+    color: #777;
+}
+body.dark-theme #legend-container p {
+    color: #aaa;
+}
+
+
+/* Buttons Section */
+.buttons-section {
+    margin-top: 30px;
+    text-align: center;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    border-radius: 6px;
+    margin: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+button:hover {
+    background-color: var(--primary-hover-color);
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+button:active {
+    transform: translateY(0px); /* Press down effect */
+}
+button i { /* Icon margin */
+    margin-right: 8px;
+}
+
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #f0f0f0; /* Default light footer */
+    color: #555;
+    border-top: 1px solid var(--border-color-light);
+    font-size: 0.9rem;
+}
+footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+/* Print Styles */
+@media print {
+    body {
+        background-color: var(--bg-color-light) !important; /* Ensure white background for printing */
+        color: #000 !important; /* Ensure black text */
+        -webkit-print-color-adjust: exact !important; /* Force background colors and images to print in Chrome/Safari */
+        print-color-adjust: exact !important; /* Standard */
+    }
+
+    .theme-toggler,
+    header,
+    .input-section,
+    .buttons-section,
+    footer:not(.pdf-footer-content) { /* Hide non-essential elements, keep a special footer if needed for PDF */
+        display: none !important;
+    }
+
+    .container {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        background-color: var(--bg-color-light) !important;
+    }
+
+    #timetable-export-wrapper {
+        padding: 0 !important; /* Remove padding for PDF as it's about A4 fitting */
+        background-color: transparent !important; /* Let body bg show */
+    }
+    
+    #timetable-grid-container {
+        overflow-x: visible !important; /* Don't scroll in print */
+    }
+
+    #timetable-grid {
+        display: grid !important; /* Ensure grid layout is maintained */
+        gap: 1px !important;
+        border: 1px solid #333 !important; /* Clearer borders for print */
+        background-color: var(--bg-color-light) !important;
+    }
+    
+    #timetable-grid div {
+        border: 1px solid #666 !important; /* Slightly lighter cell borders */
+        color: #000 !important; /* Black text for all cells */
+        -webkit-print-color-adjust: exact !important; /* Ensure cell backgrounds print */
+        print-color-adjust: exact !important;
+        font-size: 9pt !important; /* Adjust font size for A4 */
+        padding: 5px !important; /* Adjust padding */
+    }
+
+    #timetable-grid .time-slot,
+    #timetable-grid .day {
+        background-color: #f0f0f0 !important; /* Light grey for headers */
+        font-weight: bold !important;
+    }
+
+    #timetable-grid .lunch { /* Ensure lunch break colors print */
+        background-color: #ff6b6b !important;
+        color: #fff !important;
+    }
+
+    /* Specific styles for the PDF footer if you add one that needs to be visible */
+    .pdf-footer-content { /* Add this class to a div you want as a styled PDF footer */
+        display: block !important;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        padding: 10px;
+        background-color: #f0f0f0 !important; /* Match light theme for consistency */
+        color: #333 !important;
+        font-size: 8pt !important;
+        border-top: 1px solid #ccc !important;
+    }
+
+    /* Ensure the watermark is not printed or is very faint */
+    #timetable-grid::before {
+        opacity: 0.02 !important; /* Very very faint or display: none; */
+        /* background-image: none !important; /* Option to remove it completely for print */
+    }
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 960px) {
+    .container {
+        margin-left: 15px;
+        margin-right: 15px;
+        padding: 20px;
+    }
+    #timetable-grid {
+        min-width: 600px; /* Adjust min-width as needed */
+    }
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    header p {
+        font-size: 1rem;
+    }
+    .subject-input-section #subject-form {
+        flex-direction: column;
+        align-items: stretch; /* Make form elements full width */
+    }
+    .subject-input-section #subject-form div {
+        width: 100%;
+    }
+    .subject-input-section input[type="text"],
+    .subject-input-section input[type="color"],
+    .subject-input-section button {
+        width: 100%;
+        box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    }
+    .subject-input-section button {
+        margin-top: 10px;
+    }
+
+    .course-semester-section {
+        flex-direction: column;
+    }
+    .course-semester-section input[type="text"] {
+        width: calc(100% - 24px); /* Adjust for padding */
+    }
+
+
+    #timetable-grid div {
+        font-size: 0.8rem;
+        padding: 8px 5px;
+        min-height: 45px;
+    }
+    /* JS will adjust grid-template-columns for mobile */
+
+    button {
+        padding: 10px 18px;
+        font-size: 0.95rem;
+    }
+    .theme-toggler {
+        top: 10px;
+        right: 10px;
+    }
+    .theme-toggler button {
+        padding: 8px 10px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #timetable-grid div {
+        font-size: 0.7rem;
+        padding: 6px 3px;
+        min-height: 40px;
+    }
+    #timetable-grid {
+        min-width: 500px; /* Further reduce min-width */
+    }
+    header h1 {
+        font-size: 1.8rem;
+    }
+}
